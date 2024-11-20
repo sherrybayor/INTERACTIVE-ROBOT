@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>3D Model Animation</title>
+    <meta charset="utf-8">
+    <meta name="description" content="3D Model Viewer with Animation Controls">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" href="./styles.css" rel="stylesheet"/>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+    <style>
+        /* Basic styling for buttons */
+        .animation-button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        #ar-prompt {
+            display: none; /* Hide AR prompt initially */
+        }
+    </style>
+</head>
+<body>
+    <model-viewer id="model-viewer" src="RobotExpressive.glb" ar ar-modes="scene-viewer webxr quick-look" camera-controls tone-mapping="neutral" ar-placement="floor" poster="poster.webp" shadow-intensity="1" autoplay animation-name="ThumbsUp">
+        <div class="progress-bar hide" slot="progress-bar">
+            <div class="update-bar"></div>
+        </div>
+        <button slot="ar-button">
+            👋 Activate AR to View in your space
+        </button>
+        <div id="ar-prompt">
+            <img src="ar_hand_prompt.png" alt="AR Prompt">
+        </div>
+    </model-viewer>
+
+    <div class="controls">
+        <button class="animation-button" data-animation="Dance">Dance</button>
+        <button class="animation-button" data-animation="Wave">Wave</button>
+        <button class="animation-button" data-animation="WalkJump">Walk Jump</button>
+        <button class="animation-button" data-animation="Death">Death</button>
+        <button class="animation-button" data-animation="Jump">Jump</button>
+        <button class="animation-button" data-animation="Punch">Punch</button>
+        <button class="animation-button" data-animation="Running">Run</button>
+        <button class="animation-button" data-animation="Sitting">Sit</button>
+        <button class="animation-button" data-animation="ThumbsUp">Thumbs Up</button>
+        <button class="animation-button" data-animation="Walking">Walk</button>
+        <button class="animation-button" data-animation="Yes">Agree</button>
+        <button class="animation-button" data-animation="No">Disagree</button>
+        <button id="toggle-animation">Toggle Auto Animation</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modelViewer = document.querySelector("#model-viewer");
+
+            // Change animation based on button clicked
+            document.querySelectorAll('.animation-button').forEach((button) => {
+                button.addEventListener('click', (event) => {
+                    const animationName = event.target.getAttribute('data-animation');
+                    modelViewer.animationName = animationName;
+                });
+            });
+
+            // Auto-switching animation logic
+            const toggleButton = document.querySelector('#toggle-animation');
+            let autoSwitching = false;
+            let animationIndex = 0;
+            const animations = ['Dance', 'Wave', 'Clap', 'Walk', 'WalkJump', 'Yes', 'No','Punch'];
+            let animationInterval;
+
+            toggleButton.addEventListener('click', () => {
+                autoSwitching = !autoSwitching;
+                toggleButton.textContent = autoSwitching ? 'Stop Auto Animation' : 'Toggle Auto Animation';
+                if (autoSwitching) {
+                    startAutoSwitching();
+                } else {
+                    clearInterval(animationInterval);
+                }
+            });
+
+            function startAutoSwitching() {
+                animationInterval = setInterval(() => {
+                    modelViewer.animationName = animations[animationIndex];
+                    animationIndex = (animationIndex + 1) % animations.length;
+                }, 1500);
+            }
+        });
+    </script>
+</body>
+</html>
