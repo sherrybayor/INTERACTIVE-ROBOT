@@ -10,13 +10,16 @@
     <style>
         /* Basic styling for buttons */
         .animation-button {
-            margin: 5px;
-            padding: 10px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: white;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            margin: 10px;
+  padding: 10px 10px;
+  border: none;
+  background: none;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  overflow: hidden;
+  display: inline;
+  
         }
         #ar-prompt {
             display: none; /* Hide AR prompt initially */
@@ -49,7 +52,7 @@
         <button class="animation-button" data-animation="Walking">Walk</button>
         <button class="animation-button" data-animation="Yes">Agree</button>
         <button class="animation-button" data-animation="No">Disagree</button>
-        <button id="toggle-animation">Toggle Auto Animation</button>
+        <button class="animation-button" id="toggle-animation">Toggle Auto Animation</button>
     </div>
 
     <script>

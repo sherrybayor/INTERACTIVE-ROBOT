@@ -12,6 +12,83 @@ body {
   width: 100%;
   height: 100%;
 }
+body button {
+  position: relative;
+  z-index: 2;
+  display: block;
+}
+body button:before, body button:after {
+  position: relative;
+  z-index: 1;
+}
+body button:active {
+  transform: translateY(1px);
+}
+body button:active .text {
+  transform: scale(0.95);
+}
+ {
+  overflow: hidden;
+  color: rebeccapurple;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+  background-image: radial-gradient(circle at center, rgba(0, 167, 225, 0.25), rgba(0, 110, 149, 0.5));
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.75), inset 0 0 0 2px rgba(0, 0, 0, 0.3), inset 0 -6px 6px -3px rgba(0, 129, 174, 0.2);
+  position: relative;
+}
+body button.animation-button:after {
+  content: "";
+  background: rgba(0, 167, 225, 0.2);
+  display: block;
+  position: absolute;
+  z-index: 0;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  
+}
+body button.animation-button:before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: calc(100% - 4px);
+  height: 35px;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0));
+  top: 2px;
+  left: 2px;
+  border-radius: 30px 30px 200px 200px;
+  opacity: 0.7;
+}
+body button.animation-button:hover {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
+}
+body button.animation-button:hover:before {
+  opacity: 1;
+}
+body button.animation-button:active {
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.9);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.75), inset 0 0 0 2px rgba(0, 0, 0, 0.3), inset 0 -6px 6px -3px rgba(0, 129, 174, 0.2);
+}
+body button.animation-button:active:before {
+  height: 25px;
+}
+body button.animation-button {
+  background-color: #990000;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.75);
+  color: white;
+  text-shadow: 0 1px 2px #20170c;
+  background-position: 0px 0px;
+  transition: background-color 0.25s ease-in-out;
+  background-image: repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 1px, transparent 1px, transparent 4px), repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 1px, transparent 1px, transparent 2px), repeating-linear-gradient(45deg, rgba(51, 0, 0, 0.5), rgba(51, 0, 0, 0.5) 8px, transparent 8px, transparent 16px), repeating-linear-gradient(-45deg, rgba(102, 0, 0, 0.5), rgba(102, 0, 0, 0.5) 8px, transparent 8px, transparent 16px);
+}
+body button.animation-button:hover {
+  background-color: #b30000;
+  text-shadow: 0 1px 2px black;
+}
+body button.animation-button:active {
+  text-shadow: 0 0px 2px black;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.75);
+}
 
 model-viewer {
   width: 100%;
